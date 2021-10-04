@@ -26,7 +26,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c7W-Sk-RCb">
-                                        <rect key="frame" x="10" y="115" width="150" height="4"/>
+                                        <rect key="frame" x="0.0" y="115" width="170" height="4"/>
                                     </progressView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3vh-QQ-lX8">
                                         <rect key="frame" x="70" y="168" width="30" height="78"/>
@@ -36,6 +36,11 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="c7W-Sk-RCb" firstAttribute="leading" secondItem="PHQ-aB-LPi" secondAttribute="leading" id="1K8-QG-1fU"/>
+                                    <constraint firstItem="c7W-Sk-RCb" firstAttribute="centerX" secondItem="PHQ-aB-LPi" secondAttribute="centerX" id="7kL-tS-OU6"/>
+                                    <constraint firstAttribute="trailing" secondItem="c7W-Sk-RCb" secondAttribute="trailing" id="qLV-2M-wOV"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
