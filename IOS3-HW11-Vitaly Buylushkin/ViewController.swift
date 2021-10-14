@@ -10,7 +10,9 @@ import UIKit
 class ViewController: UIViewController {
     private var isWorkTime = true
     private var isStarted = false
-    private var count = 300
+    private var count = 5
+    private var progressStep = Double()
+   
     private var myTimer = Timer()
 
     @IBOutlet weak var myLabel: UILabel!
@@ -22,6 +24,7 @@ class ViewController: UIViewController {
     
     @IBAction func myButtonPressed(_ sender: Any) {
         isStarted = !isStarted
+        
         if isStarted {
             self.myButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
             createTimer()
@@ -35,18 +38,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         self.myProgressView.progress = 0.0
+        progressStep = 1.0 / Double(count)
+        
         self.myButton.setImage(UIImage(systemName: "play"), for: .normal)
-        if count == 1500 {
-            isWorkTime = true
-            self.myButton.setTitleColor(UIColor.red, for: .normal)
-            self.myLabel.textColor = UIColor.red
-            self.myProgressView.progressTintColor = UIColor.red
-        } else {
-            isWorkTime = false
-            self.myButton.setTitleColor(UIColor.green, for: .normal)
-            self.myLabel.textColor = UIColor.green
-            self.myProgressView.progressTintColor = UIColor.green
-        }
+        isWorkTime = true
+        self.myButton.setTitleColor(UIColor.red, for: .normal)
+        self.myLabel.textColor = UIColor.red
+        self.myProgressView.progressTintColor = UIColor.red
     }
     
     //MARK: - Timer
@@ -62,15 +60,9 @@ class ViewController: UIViewController {
     @objc private func updateProgressView() {
         if myProgressView.progress != 1.0 {
             count -= 1
-            if isWorkTime {
-                self.myProgressView.progress += 0.0006667
-                let time = secondsToMinutesSeconds(count)
-                self.myLabel.text = makeTimeString(time.0, time.1)
-            } else {
-                self.myProgressView.progress += 0.00333333
-                let time = secondsToMinutesSeconds(count)
-                self.myLabel.text = makeTimeString(time.0, time.1)
-            }
+            self.myProgressView.progress += Float(progressStep)
+            let time = secondsToMinutesSeconds(count)
+            self.myLabel.text = makeTimeString(time.0, time.1)
         } else  {
             isWorkTime = !isWorkTime
             self.myProgressView.progress = 0.0
@@ -78,17 +70,16 @@ class ViewController: UIViewController {
                 self.myButton.setTitleColor(UIColor.red, for: .normal)
                 self.myButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
                 self.myLabel.textColor = UIColor.red
-                self.myLabel.text = "25 : 00"
                 count = 1500
                 self.myProgressView.progressTintColor = UIColor.red
             } else {
                 self.myButton.setTitleColor(UIColor.green, for: .normal)
                 self.myButton.setImage(UIImage(systemName: "play"), for: .normal)
                 self.myLabel.textColor = UIColor.green
-                self.myLabel.text = "05 : 00"
                 count = 300
                 self.myProgressView.progressTintColor = UIColor.green
             }
+            progressStep = 1.0 / Double(count)
         }
 }
     
